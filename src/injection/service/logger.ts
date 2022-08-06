@@ -3,7 +3,7 @@ import { Logger } from '@/service/logger/Logger'
 import { PrettyLogger } from '@/service/logger/pretty/PrettyLogger'
 import { JsonLogger } from '@/service/logger/json/JsonLogger'
 
-switch (process.env.SERVICE__LOGGER) {
+switch (process.env.INJECTION__SERVICE__LOGGER) {
   case 'pretty':
     container.register<Logger>('Logger', PrettyLogger)
     break

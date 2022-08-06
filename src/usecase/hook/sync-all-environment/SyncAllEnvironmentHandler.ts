@@ -20,9 +20,9 @@ export class SyncAllEnvironmentHandler {
   constructor(private usecase: SyncAllEnvironment) {}
 
   async execute(request: unknown) {
-    const { success } = this.schema.safeParse(request)
-    if (!success) {
-      throw new ValidationError('Invalid request')
+    const result = this.schema.safeParse(request)
+    if (!result.success) {
+      throw new ValidationError('Invalid request', result.error)
     }
 
     await this.usecase.execute(request as Request)

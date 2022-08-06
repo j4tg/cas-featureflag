@@ -6,7 +6,7 @@ import { Request } from './Request'
 export class SyncAllEnvironment {
   // constructor(private repository: FlagRepository) {}
 
-  async execute(data: Request): Promise<void> {
+  async execute(data: Request) {
     console.log(data)
     // for (const flag of data.flags) {
     //   await this.repository.put({
