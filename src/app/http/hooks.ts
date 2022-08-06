@@ -6,12 +6,17 @@ import { Router } from './shared/Router'
 export const handler = async (event: APIGatewayEvent, context: Context) => {
   const router = container.resolve(Router)
 
-  router.route('GET', '/hooks/flags/:project/environment/all', async () => {
-    await container
-      .resolve(SyncAllEnvironmentHandler)
-      .execute(JSON.parse(event.body || '{}'))
-    return { body: 'success' }
-  })
+  router.route(
+    'GET',
+    '/hooks/flags/:project/environment/all',
+    async ({ params }) => {
+      await container.resolve(SyncAllEnvironmentHandler).execute({
+        project: params.project,
+        flags: JSON.parse(event.body || '[]')
+      })
+      return { body: 'success' }
+    }
+  )
 
   return await router.handler(event, context)
 }
