@@ -1,27 +1,17 @@
 import UrlPattern from 'url-pattern'
 import { APIGatewayEvent, Context } from 'aws-lambda'
-import { inject, injectable } from 'tsyringe'
 import { stringify } from '@/shared/stringify'
 import { ValidationError } from '@/error/ValidationError'
 import { Logger } from '@/service/logger/Logger'
+import { container } from '@/injection/container'
 
-@injectable()
-export class Router {
-  private routes: Route[] = []
+export function router(routes: Route[]) {
+  const logger = container.resolve<Logger>('Logger')
 
-  constructor(
-    @inject('Logger')
-    private readonly logger: Logger
-  ) {}
+  return async (event: APIGatewayEvent, context: Context) => {
+    logger.debug(`${event.httpMethod} ${event.path}`)
 
-  public route(method: HttpMethod, pattern: string, handler: HttpHandler) {
-    this.routes.push({ method, pattern, handler })
-  }
-
-  public async handler(event: APIGatewayEvent, context: Context) {
-    this.logger.debug(`${event.httpMethod} ${event.path}`)
-
-    for (const route of this.routes) {
+    for (const route of routes) {
       if (route.method !== event.httpMethod) {
         continue
       }
@@ -43,8 +33,8 @@ export class Router {
           body: typeof body !== 'string' ? JSON.stringify(body) : body
         }
       } catch (error) {
-        this.logger.debug('router handler error', error)
-        const formatted = this.httpErrorFormatter(error as Error)
+        logger.debug('router handler error', error)
+        const formatted = httpErrorFormatter(error as Error)
 
         return {
           statusCode: formatted.statusCode,
@@ -58,26 +48,26 @@ export class Router {
       body: `Cannot ${event.httpMethod} ${event.path}`
     }
   }
+}
 
-  private httpErrorFormatter(error: Error) {
-    const debug = JSON.parse(stringify(error))
+function httpErrorFormatter(error: Error) {
+  const debug = JSON.parse(stringify(error))
 
-    let status = 500
-    let name = 'Internal Server Error'
+  let status = 500
+  let name = 'Internal Server Error'
 
-    if (error instanceof ValidationError) {
-      status = 400
-      name = 'Bad Request'
-    }
+  if (error instanceof ValidationError) {
+    status = 400
+    name = 'Bad Request'
+  }
 
-    return {
-      statusCode: status,
-      body: {
-        error: name,
-        message: error.message,
-        timestamp: new Date().toISOString(),
-        debug: debug
-      }
+  return {
+    statusCode: status,
+    body: {
+      error: name,
+      message: error.message,
+      timestamp: new Date().toISOString(),
+      debug: debug
     }
   }
 }
