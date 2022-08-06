@@ -1,0 +1,18 @@
+# node
+node_modules
+
+# coverage
+coverage
+
+# ignore all hidden files
+.*
+# except
+!.gitkeep
+!.gitignore
+!.gitattributes
+!.editorconfig
+!.prettierrc.json
+!.prettierignore
+!.eslintrc.json
+!.eslintignore
+!.env

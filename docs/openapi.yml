@@ -1,0 +1,59 @@
+openapi: 3.0.2
+info:
+  title: Feature Flags
+  version: '1.0'
+servers:
+  - url: https://api.server.test/dev
+  - url: https://api.server.test/qa
+  - url: https://api.server.test/prod
+tags:
+  - name: Flags
+  - name: Hooks
+paths:
+  '/api/flags/{project}/{environment}':
+    get:
+      tags:
+        - Flags
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environment
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    isEnabled:
+                      type: boolean
+  '/hooks/flags/{project}/environment/all':
+    post:
+      tags:
+        - Hooks
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: success
