@@ -1,7 +1,7 @@
 import UrlPattern from 'url-pattern'
 import { APIGatewayEvent, Context } from 'aws-lambda'
 import { stringify } from '@/infrastructure/shared/stringify'
-import { container } from '@/infrastructure/container'
+import { container } from '@/infrastructure/injection'
 import { ValidationError } from '@/core/error/ValidationError'
 import { Logger } from '@/core/ports/Logger'
 

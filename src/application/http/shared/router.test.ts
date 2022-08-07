@@ -1,6 +1,6 @@
 import { mock } from 'jest-mock-extended'
 import { APIGatewayEvent, Context } from 'aws-lambda'
-import { container } from '@/infrastructure/container'
+import { container } from '@/infrastructure/injection'
 import { Logger } from '@/core/ports/Logger'
 import { ValidationError } from '@/core/error/ValidationError'
 import { router } from './router'

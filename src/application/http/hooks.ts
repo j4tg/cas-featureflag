@@ -1,4 +1,4 @@
-import { container } from '@/infrastructure/container'
+import { container } from '@/infrastructure/injection'
 import { SyncAllEnvironmentHandler } from '@/core/usecase/hook/sync-all-environment/SyncAllEnvironmentHandler'
 import { router } from './shared/Router'
 
