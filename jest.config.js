@@ -14,6 +14,6 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: __dirname
   }),
-  setupFiles: ['./test/setup.ts'],
-  collectCoverageFrom: ['src/**', '!src/injection/**']
+  collectCoverageFrom: ['src/**', '!src/injection/**'],
+  setupFiles: ['./test/setup.js', './test/dynamodb/setup-before-env.js']
 }
