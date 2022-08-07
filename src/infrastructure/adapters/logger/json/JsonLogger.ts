@@ -1,5 +1,5 @@
-import { Logger } from '../Logger'
-import { stringify } from '@/shared/stringify'
+import { Logger } from '@/core/ports/Logger'
+import { stringify } from '@/infrastructure/shared/stringify'
 
 export class JsonLogger implements Logger {
   debug(message: string, ...details: unknown[]): void {

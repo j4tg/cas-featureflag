@@ -1,5 +1,5 @@
-import { Flag } from '../Flag'
-import { FlagRepository } from '../FlagRepository'
+import { Flag } from '@/core/ports/repository/flag/Flag'
+import { FlagRepository } from '@/core/ports/repository/flag/FlagRepository'
 
 export class DynamoDBFlagRepository implements FlagRepository {
   async put(flag: Flag): Promise<void> {

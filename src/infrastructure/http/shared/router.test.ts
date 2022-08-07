@@ -1,9 +1,9 @@
 import { mock } from 'jest-mock-extended'
 import { APIGatewayEvent, Context } from 'aws-lambda'
+import { container } from '@/infrastructure/container'
+import { Logger } from '@/core/ports/Logger'
+import { ValidationError } from '@/core/error/ValidationError'
 import { router } from './router'
-import { Logger } from '@/service/logger/Logger'
-import { container } from '@/injection/container'
-import { ValidationError } from '@/error/ValidationError'
 
 test('deberia invocar la función que coincida con la ruta de metodo get', async () => {
   // Arrange

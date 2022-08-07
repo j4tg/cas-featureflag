@@ -1,9 +1,9 @@
 import UrlPattern from 'url-pattern'
 import { APIGatewayEvent, Context } from 'aws-lambda'
-import { stringify } from '@/shared/stringify'
-import { ValidationError } from '@/error/ValidationError'
-import { Logger } from '@/service/logger/Logger'
-import { container } from '@/injection/container'
+import { stringify } from '@/infrastructure/shared/stringify'
+import { container } from '@/infrastructure/container'
+import { ValidationError } from '@/core/error/ValidationError'
+import { Logger } from '@/core/ports/Logger'
 
 export function router(routes: Route[]) {
   const logger = container.resolve<Logger>('Logger')

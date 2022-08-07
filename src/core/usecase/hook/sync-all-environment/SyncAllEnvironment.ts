@@ -1,4 +1,4 @@
-import { FlagRepository } from '@/repository/flag/FlagRepository'
+import { FlagRepository } from '@/core/ports/repository/flag/FlagRepository'
 import { inject, injectable } from 'tsyringe'
 import { Request } from './Request'
 

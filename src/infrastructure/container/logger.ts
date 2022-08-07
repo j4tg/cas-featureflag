@@ -1,7 +1,7 @@
 import { container } from 'tsyringe'
-import { Logger } from '@/service/logger/Logger'
-import { PrettyLogger } from '@/service/logger/pretty/PrettyLogger'
-import { JsonLogger } from '@/service/logger/json/JsonLogger'
+import { Logger } from '@/core/ports/Logger'
+import { PrettyLogger } from '@/infrastructure/adapters/logger/pretty/PrettyLogger'
+import { JsonLogger } from '@/infrastructure/adapters/logger/json/JsonLogger'
 
 switch (process.env.INJECTION__SERVICE__LOGGER) {
   case 'pretty':

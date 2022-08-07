@@ -18,7 +18,7 @@ custom:
 
 functions:
   hooks:
-    handler: ./src/app/http/hooks.handler
+    handler: ./src/infrastructure/http/hooks.handler
     events:
       - http:
           path: /hooks

@@ -1,8 +1,8 @@
+import { injectable } from 'tsyringe'
 import { z } from 'zod'
+import { ValidationError } from '@/core/error/ValidationError'
 import { SyncAllEnvironment } from './SyncAllEnvironment'
 import { Request } from './Request'
-import { ValidationError } from '@/error/ValidationError'
-import { injectable } from 'tsyringe'
 
 @injectable()
 export class SyncAllEnvironmentHandler {
